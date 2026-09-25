@@ -1,0 +1,9 @@
+# Regenerate with: dart run flutter_launcher_icons
+# Sources are built from D:\SkorX\favicon.png (see branding/README.md).
+flutter_launcher_icons:
+  image_path: "branding/app_icon.png"
+  android: true
+  adaptive_icon_background: "#09121E"
+  adaptive_icon_foreground: "branding/app_icon_foreground.png"
+  ios: true
+  remove_alpha_ios: true

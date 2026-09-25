@@ -1,0 +1,104 @@
+{
+  "about": "Shared scoring test vectors. Each case replays rally winners through a sport's engine and checks the result. 'rallies' is a list of segments; 'ab*3' means 'ababab'. 'serve' is the serving side plus the server number when one is used (e.g. 'a2'). Run by the app's flutter tests; the API should run the same file once it enforces serve order.",
+  "cases": [
+    {
+      "name": "pickleball side-out doubles: first-server rule, then server 1 and 2",
+      "sport": "pickleball",
+      "rules": { "pointsToWin": 11, "winByTwo": true, "bestOf": 1, "scoring": "side_out" },
+      "playersPerSide": 2,
+      "firstServer": "a",
+      "checkpoints": [
+        { "rallies": [], "games": ["0-0"], "serve": "a2", "call": "0-0-2" },
+        { "rallies": ["a"], "games": ["1-0"], "serve": "a2", "call": "1-0-2" },
+        { "rallies": ["b"], "games": ["1-0"], "serve": "b1", "call": "0-1-1" },
+        { "rallies": ["b"], "games": ["1-1"], "serve": "b1", "call": "1-1-1" },
+        { "rallies": ["a"], "games": ["1-1"], "serve": "b2", "call": "1-1-2" },
+        { "rallies": ["a"], "games": ["1-1"], "serve": "a1", "call": "1-1-1" }
+      ]
+    },
+    {
+      "name": "pickleball side-out singles: only the server scores",
+      "sport": "pickleball",
+      "rules": { "pointsToWin": 11, "winByTwo": true, "bestOf": 1, "scoring": "side_out" },
+      "playersPerSide": 1,
+      "firstServer": "a",
+      "checkpoints": [
+        { "rallies": ["a"], "games": ["1-0"], "serve": "a", "call": "1-0" },
+        { "rallies": ["b"], "games": ["1-0"], "serve": "b", "call": "0-1" },
+        { "rallies": ["b"], "games": ["1-1"], "serve": "b", "call": "1-1" },
+        { "rallies": ["a"], "games": ["1-1"], "serve": "a", "call": "1-1" }
+      ]
+    },
+    {
+      "name": "pickleball side-out doubles: next game alternates first serve and restarts on server 2",
+      "sport": "pickleball",
+      "rules": { "pointsToWin": 3, "winByTwo": false, "bestOf": 3, "scoring": "side_out" },
+      "playersPerSide": 2,
+      "firstServer": "a",
+      "checkpoints": [
+        { "rallies": ["a*3"], "games": ["3-0", "0-0"], "serve": "b2", "call": "0-0-2", "gamesWon": [1, 0] }
+      ]
+    },
+    {
+      "name": "pickleball rally doubles: every rally scores and the match ends on a majority of games",
+      "sport": "pickleball",
+      "rules": { "pointsToWin": 3, "winByTwo": false, "bestOf": 3, "scoring": "rally" },
+      "playersPerSide": 2,
+      "firstServer": "a",
+      "checkpoints": [
+        { "rallies": ["a*3"], "games": ["3-0", "0-0"], "serve": "b", "gamesWon": [1, 0] },
+        { "rallies": ["b*3"], "games": ["3-0", "0-3", "0-0"], "serve": "a", "gamesWon": [1, 1] },
+        { "rallies": ["a*3"], "games": ["3-0", "0-3", "3-0"], "winner": "a", "gamesWon": [2, 1] }
+      ]
+    },
+    {
+      "name": "pickleball: win by two carries on past the target",
+      "sport": "pickleball",
+      "rules": { "pointsToWin": 11, "winByTwo": true, "bestOf": 1, "scoring": "rally" },
+      "playersPerSide": 1,
+      "firstServer": "a",
+      "checkpoints": [
+        { "rallies": ["ab*10", "a"], "games": ["11-10"] },
+        { "rallies": ["b"], "games": ["11-11"] },
+        { "rallies": ["a", "a"], "games": ["13-11"], "winner": "a" }
+      ]
+    },
+    {
+      "name": "badminton: 30 wins at 29-all",
+      "sport": "badminton",
+      "rules": { "pointsToWin": 21, "winByTwo": true, "bestOf": 1, "pointCap": 30, "scoring": "rally" },
+      "playersPerSide": 1,
+      "firstServer": "a",
+      "checkpoints": [
+        { "rallies": ["ab*29"], "games": ["29-29"], "serve": "b" },
+        { "rallies": ["a"], "games": ["30-29"], "winner": "a" }
+      ]
+    },
+    {
+      "name": "badminton: the game winner serves first in the next game",
+      "sport": "badminton",
+      "rules": { "pointsToWin": 3, "winByTwo": false, "bestOf": 3, "scoring": "rally" },
+      "playersPerSide": 2,
+      "firstServer": "a",
+      "checkpoints": [
+        { "rallies": ["b*3"], "games": ["0-3", "0-0"], "serve": "b", "gamesWon": [0, 1] }
+      ]
+    },
+    {
+      "name": "table tennis: serve changes every two points, then every point from 10-10",
+      "sport": "table_tennis",
+      "rules": { "pointsToWin": 11, "winByTwo": true, "bestOf": 5, "scoring": "rally" },
+      "playersPerSide": 1,
+      "firstServer": "a",
+      "checkpoints": [
+        { "rallies": [], "serve": "a" },
+        { "rallies": ["a"], "serve": "a" },
+        { "rallies": ["b"], "games": ["1-1"], "serve": "b" },
+        { "rallies": ["ab"], "games": ["2-2"], "serve": "a" },
+        { "rallies": ["ab*8"], "games": ["10-10"], "serve": "a" },
+        { "rallies": ["a"], "games": ["11-10"], "serve": "b" },
+        { "rallies": ["b"], "games": ["11-11"], "serve": "a" }
+      ]
+    }
+  ]
+}

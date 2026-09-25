@@ -1,0 +1,13 @@
+# Regenerate with: dart run flutter_native_splash:create
+# Background matches the dark theme background (SkorxColors.dark.background),
+# so the native splash hands off to the Flutter SplashScreen without a flash.
+flutter_native_splash:
+  color: "#060A10"
+  image: branding/splash_logo.png
+  android_12:
+    color: "#060A10"
+    icon_background_color: "#09121E"
+    image: branding/splash_android12.png
+  android: true
+  ios: true
+  web: false
